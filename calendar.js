@@ -3,7 +3,7 @@ function eventExists(eventTitle,startTime,endTime) {
   const start = new Date(startTime).getTime();
   const end = new Date(endTime).getTime();
   calendar = calendar ?? CalendarApp.getDefaultCalendar();
-  const events = calendar.getEvents(startTime, endTime);
+  const events = calendar.getEvents(start, end);
   
   if(!events?.length){
     return false;
