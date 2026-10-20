@@ -1,5 +1,7 @@
 let calendar;
 function eventExists(eventTitle,startTime,endTime) {
+  const start = new Date(startTime).getTime();
+  const end = new Date(endTime).getTime();
   calendar = calendar ?? CalendarApp.getDefaultCalendar();
   const events = calendar.getEvents(startTime, endTime);
   
@@ -9,9 +11,7 @@ function eventExists(eventTitle,startTime,endTime) {
   
   for(const event of events){
     const title = event.getTitle();
-    const start = event.getStartTime();
-    const end = event.getEndTime();
-    if(start == startTime && end == endTime && lcsMatch(title,eventTitle)){
+    if(start == event.getStartTime().getTime() && end == event.getEndTime().getTime() && lcsMatch(title,eventTitle)){
       return true;
     } 
   }
