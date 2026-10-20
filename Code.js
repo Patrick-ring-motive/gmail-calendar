@@ -30,7 +30,11 @@ function searchMessages(query, start, max){
   return messages;
 }
 
+function getMessagesFrom(from){
+  return searchMessages(`from:${from} newer_than:7d`, 0, 50)
+    .filter(m=>m?.getFrom?.()?.includes?.(from));
+}
+
 function listNisd() {
-  return searchMessages('from:@nisd.net newer_than:7d', 0, 50)
-    .filter(m=>m?.getFrom?.()?.includes?.('@nisd.net'));
+  return getMessagesFrom('@nisd.net');
 }
