@@ -140,22 +140,21 @@ const lcsMatch = (seq1, seq2) => {
   return boundedLcs(seq1, seq2) >= Math.floor(Math.max(seq1?.length || 0, seq2?.length || 0) * 0.8);
 };
 
- 
-function eventExists(eventTitle,startTime,endTime) {
+function eventExists(eventTitle, startTime, endTime) {
   const start = new Date(startTime);
   const end = new Date(endTime);
   $.calendar = $.calendar ?? CalendarApp.getDefaultCalendar();
   const events = $.calendar.getEvents(start, end);
-  
-  if(!events?.length){
+
+  if (!events?.length) {
     return false;
   }
-  
-  for(const event of events){
+
+  for (const event of events) {
     const title = event.getTitle();
-    if(start.getTime() == event.getStartTime().getTime() && end.getTime() == event.getEndTime().getTime() && lcsMatch(String(title).trim().toLowerCase(),String(eventTitle).trim().toLowerCase())){
+    if (start.getTime() == event.getStartTime().getTime() && end.getTime() == event.getEndTime().getTime() && lcsMatch(String(title).trim().toLowerCase(), String(eventTitle).trim().toLowerCase())) {
       return true;
-    } 
+    }
   }
   return false;
 }
