@@ -1,38 +1,38 @@
-function searchThreads(query, start, max){
-  try{
+function searchThreads(query, start, max) {
+  try {
     return GmailApp.search(query, start, max);
-  }catch(e){
+  } catch (e) {
     console.warn(e, ...arguments);
     return [];
   }
 }
 
-function searchMessages(query, start, max){
+function searchMessages(query, start, max) {
   const messages = [];
-  try{
+  try {
     const threads = searchThreads(query, start, max);
-    for(const thread of threads){
-      try{
-        for(const message of thread.getMessages()){
-          try{
+    for (const thread of threads) {
+      try {
+        for (const message of thread.getMessages()) {
+          try {
             messages.push(message);
-          }catch(e){
+          } catch (e) {
             console.warn(e, message);
           }
         }
-      }catch(e){
+      } catch (e) {
         console.warn(e, thread);
       }
     }
-  }catch(e){
-    console.warn(e,...arguments);
+  } catch (e) {
+    console.warn(e, ...arguments);
   }
   return messages;
 }
 
-function getMessagesFrom(from){
+function getMessagesFrom(from) {
   return searchMessages(`from:${from} newer_than:7d`, 0, 50)
-    .filter(m=>m?.getFrom?.()?.includes?.(from));
+    .filter(m => m?.getFrom?.()?.includes?.(from));
 }
 
 function listNisd() {
