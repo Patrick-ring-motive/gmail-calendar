@@ -152,7 +152,7 @@ function eventExists(eventTitle,startTime,endTime) {
   
   for(const event of events){
     const title = event.getTitle();
-    if(start == event.getStartTime().getTime() && end == event.getEndTime().getTime() && lcsMatch(title,eventTitle)){
+    if(start == event.getStartTime().getTime() && end == event.getEndTime().getTime() && lcsMatch(String(title).trim().toLowerCase(),String(eventTitle).trim().toLowerCase())){
       return true;
     } 
   }
